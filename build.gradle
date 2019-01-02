@@ -1,5 +1,5 @@
 plugins {
-    id "com.jfrog.bintray" version "1.7.3"
+    id "com.jfrog.bintray" version "1.8.4"
 }
 
 repositories {
@@ -32,8 +32,8 @@ dependencies {
 sourceCompatibility='1.8'
 targetCompatibility='1.8'
 
-jar.archiveName = "vertx-web-accesslog-logging-appender-1.0.0.jar"
-bintrayUpload.packageName = "vertx-web-accesslog-logging-appender-1.0.0.jar"
+jar.archiveName = "vertx-web-accesslog-logging-appender-1.1.0.jar"
+bintrayUpload.packageName = "vertx-web-accesslog-logging-appender-1.1.0.jar"
 
 task sourceJar(type: Jar) {
     from sourceSets.main.allJava
