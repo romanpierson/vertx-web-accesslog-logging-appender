@@ -70,4 +70,7 @@ For example see the different logging framework specific configuration files in 
 
 * Initial version (extracted from vertx-web-accesslog implementation)
 
+### 1.2.0
+
+* Adapted to version `1.2.0` of `vertx-web-accesslog`
 

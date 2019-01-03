@@ -15,37 +15,30 @@ package com.mdac.vertx.web.accesslogger.appender.logging.impl;
 import java.util.Collection;
 
 import com.mdac.vertx.web.accesslogger.appender.Appender;
-import com.mdac.vertx.web.accesslogger.configuration.element.AccessLogElement;
 
-import io.vertx.core.json.JsonObject;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 
 public class LoggingAppender implements Appender {
 
-	private final Collection<AccessLogElement> accessLogElements;
 	private String resolvedPattern;
 	private final Logger logger;
 	
-	public LoggingAppender(final LoggingAppenderOptions appenderOptions, final Collection<AccessLogElement> accessLogElements){
+	public LoggingAppender(final LoggingAppenderOptions appenderOptions){
 		
 		if(appenderOptions == null){
 			throw new IllegalArgumentException("appenderOptions must not be null");
 		}
-		
-		if(accessLogElements == null || accessLogElements.size() < 1){
-			throw new IllegalArgumentException("accessLogElements must contain at least one element");
-		}
-		
+		   
 		this.logger = LoggerFactory.getLogger(appenderOptions.getLoggerName());
-		this.accessLogElements = accessLogElements;
 		
 	}
 	
 	@Override
-	public void push(Collection<JsonObject> accessEvents) {
+	public void push(Collection<JsonArray> accessEvents) {
 		
-		for(JsonObject value : accessEvents){
+		for(JsonArray value : accessEvents){
 			
 			Object [] parameterValues = getParameterValues(value);
 			
@@ -57,14 +50,13 @@ public class LoggingAppender implements Appender {
 		
 	}
 	
-	private Object[] getParameterValues(final JsonObject values){
+	private Object[] getParameterValues(final JsonArray values){
 		
-		final String[] parameterValues = new String[accessLogElements.size()];
+		final String[] parameterValues = new String[values.size()];
 
 		int i = 0;
-		for(final AccessLogElement alElement : accessLogElements){
-			final String formattedValue = alElement.getFormattedValue(values);
-			parameterValues[i] = formattedValue != null ? formattedValue : "";
+		for (final Object xValue : values.getList()) {
+			parameterValues[i] = (String) xValue;
 			i++;
 		}
 		
