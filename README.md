@@ -14,7 +14,7 @@ Just add it as a dependency to your project (gradle example)
 
 ```xml
 dependencies {
-	compile 'com.mdac:vertx-web-accesslog-logging-appender:1.1.0'
+	compile 'com.mdac:vertx-web-accesslog-logging-appender:1.2.0'
 }
 ```
 
@@ -32,7 +32,7 @@ router
 		.handler(AccessLoggerHandler.create(new AccessLoggerOptions().setPattern("%t %m %D %T"), 
 			Arrays.asList(
 				new LoggingAppenderOptions()
-					.setLoggerName("com.mdac.vertx.web.accesslogger.impl.AccessLoggerHandlerImpl")
+					.setLoggerName("accesslog")
 			)
 		)
 );
@@ -66,8 +66,8 @@ For example see the different logging framework specific configuration files in 
 
 ## Changelog
 
-### 1.1.0
+### 1.2.0
+
+(2019-01-10)
 
 * Initial version (extracted from vertx-web-accesslog implementation)
-
-

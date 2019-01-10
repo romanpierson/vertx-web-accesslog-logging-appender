@@ -45,5 +45,12 @@ public class LoggingAppenderOptions extends AppenderOptions {
 	public String getLoggerName() {
 		return loggerName != null ? loggerName : AccessLoggerHandlerImpl.class.getName();
 	}
+	
+	@Override
+	public boolean requiresResolvedPattern() {
+		
+		return true;
+		
+	}
 
 }
