@@ -41,13 +41,6 @@ public class TestRouteVerticle extends AbstractVerticle {
 		//System.setProperty("access.location", "/tmp/accesslog ");
 		System.setProperty("access.location", "/Users/romanpierson/Documents/workspaces/github_romanpierson/vertx-web-accesslog-logging-appender/accesslog ");
 		
-		
-		// Log4J Native
-		// System.setProperty("vertx.logger-delegate-factory-class-name", "io.vertx.core.logging.Log4jLogDelegateFactory");
-		
-		// Log4J2 Native
-		//System.setProperty("vertx.logger-delegate-factory-class-name", "io.vertx.core.logging.Log4j2LogDelegateFactory");
-		
 		final Vertx vertx = Vertx.vertx();
 		vertx.deployVerticle(new TestRouteVerticle());
 
@@ -69,7 +62,7 @@ public class TestRouteVerticle extends AbstractVerticle {
 				// Example how to specify a pattern and an explicit appender
 				.handler(AccessLoggerHandler.create(new AccessLoggerOptions().setPattern("%t %m %D %T"), 
 					                        Arrays.asList(
-					                        		new LoggingAppenderOptions().setLoggerName("com.mdac.vertx.web.accesslogger.impl.AccessLoggerHandlerImpl")
+					                        		new LoggingAppenderOptions().setLoggerName("accesslog")
 					                        		)
 					                        )
 				);

@@ -12,17 +12,14 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
-version='1.2.0_RC1'
+version='1.2.0'
 
 dependencies {
 
-	compile 'com.mdac:vertx-web-accesslog:1.2.0_RC1'
+	compile 'com.mdac:vertx-web-accesslog:1.2.0'
 	
 	// Logback (via SLF4J)
 	testRuntime 'ch.qos.logback:logback-classic:1.2.3'
-	
-	// Log4J
-	//testRuntime 'log4j:log4j:1.2.17'
 	
 	testCompile 'junit:junit:4.12'
 	
@@ -32,8 +29,8 @@ dependencies {
 sourceCompatibility='1.8'
 targetCompatibility='1.8'
 
-jar.archiveName = "vertx-web-accesslog-logging-appender-1.2.0_RC1.jar"
-bintrayUpload.packageName = "vertx-web-accesslog-logging-appender-1.2.0_RC1.jar"
+jar.archiveName = "vertx-web-accesslog-logging-appender-1.2.0.jar"
+bintrayUpload.packageName = "vertx-web-accesslog-logging-appender-1.2.0.jar"
 
 task sourceJar(type: Jar) {
     from sourceSets.main.allJava
@@ -45,7 +42,7 @@ publishing {
             
             groupId 'com.mdac'
             artifactId 'vertx-web-accesslog-logging-appender'
-            version '1.2.0_RC1'
+            version '1.2.0'
             
             from components.java
 
@@ -73,7 +70,7 @@ bintray {
         override = false
         vcsUrl = 'https://github.com/romanpierson/vertx-web-accesslog-logging-appender.git'
         version {
-        	name = '1.2.0_RC1'
+        	name = '1.2.0'
         }
     }
 }

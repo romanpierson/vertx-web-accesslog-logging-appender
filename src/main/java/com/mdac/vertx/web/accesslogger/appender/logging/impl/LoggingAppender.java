@@ -12,8 +12,6 @@
  */
 package com.mdac.vertx.web.accesslogger.appender.logging.impl;
 
-import java.util.Collection;
-
 import com.mdac.vertx.web.accesslogger.appender.Appender;
 
 import io.vertx.core.json.JsonArray;
@@ -32,22 +30,19 @@ public class LoggingAppender implements Appender {
 		}
 		   
 		this.logger = LoggerFactory.getLogger(appenderOptions.getLoggerName());
+		this.resolvedPattern = appenderOptions.getResolvedPattern();
 		
 	}
 	
 	@Override
-	public void push(Collection<JsonArray> accessEvents) {
+	public void push(JsonArray accessEvent) {
 		
-		for(JsonArray value : accessEvents){
-			
-			Object [] parameterValues = getParameterValues(value);
-			
-			final String formattedString = String.format(this.resolvedPattern, parameterValues);
-			
-			this.logger.info(formattedString);
-			
-		}
+		Object [] parameterValues = getParameterValues(accessEvent);
 		
+		final String formattedString = String.format(this.resolvedPattern, parameterValues);
+		
+		this.logger.info(formattedString);
+			
 	}
 	
 	private Object[] getParameterValues(final JsonArray values){
@@ -64,26 +59,4 @@ public class LoggingAppender implements Appender {
 		
 	}
 
-	@Override
-	public boolean requiresResolvedPattern() {
-		
-		return true;
-		
-	}
-
-	@Override
-	public void setResolvedPattern(final String resolvedPattern) {
-		
-		if(resolvedPattern == null || resolvedPattern.trim().length() < 1){
-			throw new IllegalArgumentException("resolvedPattern must not be empty");
-		}
-		
-		if(this.resolvedPattern != null){
-			throw new IllegalStateException("resolvedPattern is already set");
-		}
-		
-		this.resolvedPattern = resolvedPattern;
-		
-	}
-	
 }
