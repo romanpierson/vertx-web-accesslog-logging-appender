@@ -14,7 +14,7 @@ Just add it as a dependency to your project (gradle example)
 
 ```xml
 dependencies {
-	compile 'com.mdac:vertx-web-accesslog-logging-appender:1.2.0'
+	compile 'com.mdac:vertx-web-accesslog-logging-appender:1.3.0'
 }
 ```
 
@@ -22,21 +22,29 @@ dependencies {
 
 ### Configure route
 
-Just put an instance of AccessLogHandler as first route handler
+Just put an instance of AccessLogHandler as first route handler.
 
 ```java
 Router router = Router.router(vertx);
 
-router
-	.route()
-		.handler(AccessLoggerHandler.create(new AccessLoggerOptions().setPattern("%t %m %D %T"), 
-			Arrays.asList(
-				new LoggingAppenderOptions()
-					.setLoggerName("accesslog")
-			)
-		)
-);
+JsonObject config = .... load or create your configuration json
+
+router.route().handler(AccessLoggerHandler.create(config));
+
 ```
+
+As configuration is now done by plain JsonObject its very simple to use and inject configuration eg by yaml, see as an example `ServerSetupStarter`
+
+```yaml
+configurations:
+  - identifier: accesslog-formatted
+    logPattern: '%{}t %D "cs-uri"'
+    appenders:
+      - appenderClassName : com.mdac.vertx.web.accesslogger.appender.logging.impl.LoggingAppender
+        config:
+          loggerName: accesslog
+```
+
 
 ### Configure Logger
 
@@ -71,3 +79,10 @@ For example see the different logging framework specific configuration files in 
 (2019-01-10)
 
 * Initial version (extracted from vertx-web-accesslog implementation)
+
+### 1.3.0
+
+(2019-01)
+
+* Adjusted to new version `1.3.0` of `vertx-web-accesslog`
+

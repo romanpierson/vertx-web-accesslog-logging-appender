@@ -5,3 +5,4 @@ bin
 build
 .settings
 gradle.properties
+.vertx
