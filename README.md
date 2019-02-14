@@ -82,7 +82,7 @@ For example see the different logging framework specific configuration files in 
 
 ### 1.3.0
 
-(2019-01)
+(2019-02-14)
 
 * Adjusted to new version `1.3.0` of `vertx-web-accesslog`
 
