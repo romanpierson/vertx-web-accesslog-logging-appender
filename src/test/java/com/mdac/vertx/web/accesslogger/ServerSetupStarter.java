@@ -21,8 +21,8 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.logging.Logger;
-import io.vertx.core.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -38,9 +38,6 @@ public class ServerSetupStarter {
 	
 	public static void main(String[] args) throws InterruptedException {
 		
-		System.setProperty("vertx.logger-delegate-factory-class-name", "io.vertx.core.logging.SLF4JLogDelegateFactory");
-		System.setProperty("access.location", "/Users/romanpierson/Documents/workspaces/github_romanpierson/vertx-web-accesslog-logging-appender/accesslog ");
-
 		final Vertx vertx = Vertx.vertx(new VertxOptions().setWarningExceptionTimeUnit(TimeUnit.SECONDS).setWarningExceptionTime(4).setBlockedThreadCheckIntervalUnit(TimeUnit.SECONDS).setBlockedThreadCheckInterval(4));
 		
 		vertx.exceptionHandler(throwable -> {

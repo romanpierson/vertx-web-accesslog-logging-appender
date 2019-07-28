@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/romanpierson/vertx-web-accesslog-logging-appender.svg?branch=master)](https://travis-ci.org/romanpierson/vertx-web-accesslog-logging-appender) ![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)
+[![Build Status](https://travis-ci.org/romanpierson/vertx-web-accesslog-logging-appender.svg?branch=master)](https://travis-ci.org/romanpierson/vertx-web-accesslog-logging-appender) 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=romanpierson_vertx-web-accesslog-logging-appender&metric=coverage)](https://sonarcloud.io/dashboard?id=romanpierson_vertx-web-accesslog-logging-appender)
+![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)
 
 # vertx-web-accesslog-logging-appender
 
@@ -14,7 +16,7 @@ Just add it as a dependency to your project (gradle example)
 
 ```xml
 dependencies {
-	compile 'com.mdac:vertx-web-accesslog-logging-appender:1.3.0'
+	compile 'com.mdac:vertx-web-accesslog-logging-appender:1.3.0_RC1'
 }
 ```
 
@@ -48,14 +50,11 @@ configurations:
 
 ### Configure Logger
 
-The logger itself in the current solution does not has a built in mechanism to write to the physical access file. Instead this is done by the logging framework used behind. 
-
-To chose to which logging implementation vertx logger should delegate you need to set property `vertx.logger-delegate-factory-class-name`, eg like this
+The logger itself in the current solution does not has a built in mechanism to write to the physical access file. Instead this is done by the logging framework used behind.  
 
 #### In the code before defining the access log handler
 
 ```java
-System.setProperty("vertx.logger-delegate-factory-class-name", "io.vertx.core.logging.SLF4JLogDelegateFactory");
 System.setProperty("access.location", "/tmp/accesslog ");
 ```
 
@@ -63,7 +62,6 @@ System.setProperty("access.location", "/tmp/accesslog ");
 
 ```java
 java \
--Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory \
 -Daccess.location=/Users/x/y/logs \
 -jar myFatJar.jar 
 ```
@@ -80,9 +78,8 @@ For example see the different logging framework specific configuration files in 
 
 * Initial version (extracted from vertx-web-accesslog implementation)
 
-### 1.3.0
+### 1.3.0_RC1
 
-(2019-02-14)
+(2019-07-28)
 
-* Adjusted to new version `1.3.0` of `vertx-web-accesslog`
-
+* Upgrade Vertx 4

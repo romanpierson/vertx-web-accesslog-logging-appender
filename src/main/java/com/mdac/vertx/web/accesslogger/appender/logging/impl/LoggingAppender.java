@@ -12,64 +12,59 @@
  */
 package com.mdac.vertx.web.accesslogger.appender.logging.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mdac.vertx.web.accesslogger.AccessLoggerConstants;
 import com.mdac.vertx.web.accesslogger.appender.Appender;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.logging.Logger;
-import io.vertx.core.logging.LoggerFactory;
 
 /**
  * 
- * An implementation of {@link Appender} that writes to standard log configuration (eg slf4j)
+ * An implementation of {@link Appender} that writes to standard log
+ * configuration (eg slf4j)
  * 
  * @author Roman Pierson
  *
  */
 public class LoggingAppender implements Appender {
 
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass().getName());
-	
 	private static final String CONFIG_KEY_LOGGER_NAME = "loggerName";
 
 	private String resolvedPattern;
 	private final Logger logger;
-	
-	public LoggingAppender(final JsonObject config){
-		
-		if(config == null) {
+
+	public LoggingAppender(final JsonObject config) {
+
+		if (config == null) {
 			throw new IllegalArgumentException("config must not be null");
-		}
-		else if(config.getString(AccessLoggerConstants.CONFIG_KEY_RESOLVED_PATTERN, "").trim().length() == 0){
+		} else if (config.getString(AccessLoggerConstants.CONFIG_KEY_RESOLVED_PATTERN, "").trim().length() == 0) {
 			throw new IllegalArgumentException("resolvedPattern must not be empty");
-		}
-		else if(config.getString(CONFIG_KEY_LOGGER_NAME, "").trim().length() == 0){
+		} else if (config.getString(CONFIG_KEY_LOGGER_NAME, "").trim().length() == 0) {
 			throw new IllegalArgumentException("loggerName must not be empty");
 		}
-		
+
 		final String loggerName = config.getString(CONFIG_KEY_LOGGER_NAME);
-		
+
 		this.resolvedPattern = config.getString(AccessLoggerConstants.CONFIG_KEY_RESOLVED_PATTERN);
 		this.logger = LoggerFactory.getLogger(loggerName);
-		
-		LOG.info("Created LoggingAppender with resolvedLogPattern [{}] and loggerName [{}]", this.resolvedPattern, loggerName);
-		   
 	}
-	
+
 	@Override
 	public void push(JsonArray accessEvent) {
-		
-		Object [] parameterValues = getParameterValues(accessEvent);
-		
+
+		Object[] parameterValues = getParameterValues(accessEvent);
+
 		final String formattedString = String.format(this.resolvedPattern, parameterValues);
-		
+
 		this.logger.info(formattedString);
-			
+
 	}
-	
-	private Object[] getParameterValues(final JsonArray values){
-		
+
+	private Object[] getParameterValues(final JsonArray values) {
+
 		final String[] parameterValues = new String[values.size()];
 
 		int i = 0;
@@ -77,9 +72,9 @@ public class LoggingAppender implements Appender {
 			parameterValues[i] = (String) xValue;
 			i++;
 		}
-		
+
 		return parameterValues;
-		
+
 	}
 
 }
