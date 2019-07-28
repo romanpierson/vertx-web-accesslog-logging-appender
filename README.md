@@ -78,7 +78,7 @@ For example see the different logging framework specific configuration files in 
 
 * Initial version (extracted from vertx-web-accesslog implementation)
 
-### 1.3.0_RC1
+### 1.4.0_RC1
 
 (2019-07-28)
 

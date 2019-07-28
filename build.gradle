@@ -13,7 +13,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'jacoco'
 
-version='1.3.0_RC1'
+version='1.4.0_RC1'
 
 dependencies {
 
@@ -35,8 +35,8 @@ dependencies {
 sourceCompatibility='1.8'
 targetCompatibility='1.8'
 
-jar.archiveName = "vertx-web-accesslog-logging-appender-1.3.0_RC1.jar"
-bintrayUpload.packageName = "vertx-web-accesslog-logging-appender-1.3.0_RC1.jar"
+jar.archiveName = "vertx-web-accesslog-logging-appender-1.4.0_RC1.jar"
+bintrayUpload.packageName = "vertx-web-accesslog-logging-appender-1.4.0_RC1.jar"
 
 
 task sourceJar(type: Jar) {
@@ -49,7 +49,7 @@ publishing {
             
             groupId 'com.mdac'
             artifactId 'vertx-web-accesslog-logging-appender'
-			version '1.3.0_RC1'
+			version '1.4.0_RC1'
             
             from components.java
 
@@ -82,7 +82,7 @@ bintray {
         override = false
         vcsUrl = 'https://github.com/romanpierson/vertx-web-accesslog-logging-appender.git'
         version {
-        	name = '1.3.0_RC1'
+        	name = '1.4.0_RC1'
         }
     }
 }
