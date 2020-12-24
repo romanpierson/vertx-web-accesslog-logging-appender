@@ -1,5 +1,8 @@
 plugins {
-    id "com.jfrog.bintray" version "1.8.4"
+	id 'java'
+	id 'maven-publish'
+	id 'jacoco'
+    id "com.jfrog.bintray" version "1.8.5"
 }
 
 repositories {
@@ -7,27 +10,32 @@ repositories {
     jcenter()
 }
 
-apply plugin: 'eclipse'
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'jacoco'
+ext{
+	vertxVersion = '4.0.0'
+	vertxWebAccesslogVersion = '1.4.0'
+	jupiterVersion = '5.7.0'
+	jupiterLauncherVersion ='1.7.0'
+	slfApiVersion = '1.7.30'
+	logbackVersion = '1.2.3'
+}
 
-version='1.4.0_RC1'
 
 dependencies {
 
-	compile 'com.mdac:vertx-web-accesslog:1.4.0_RC1'
+	implementation "io.vertx:vertx-core:${vertxVersion}"
+	implementation "com.mdac:vertx-web-accesslog:${vertxWebAccesslogVersion}"
+	implementation "org.slf4j:slf4j-api:${slfApiVersion}"
 	
 	// Logback (via SLF4J)
-	testRuntime 'ch.qos.logback:logback-classic:1.2.3'
+	testRuntime "ch.qos.logback:logback-classic:${logbackVersion}"
 	
-	testCompile 'io.vertx:vertx-config:4.0.0-milestone1'
-    testCompile 'io.vertx:vertx-config-yaml:4.0.0-milestone1'
+	testImplementation "io.vertx:vertx-web:${vertxVersion}"
+	testImplementation "io.vertx:vertx-config:${vertxVersion}"
+    testImplementation "io.vertx:vertx-config-yaml:${vertxVersion}"
     
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.0")
-    testCompile("org.junit.platform:junit-platform-launcher:1.5.0")
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${jupiterVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${jupiterVersion}"
+    testImplementation "org.junit.platform:junit-platform-launcher:${jupiterLauncherVersion}"
 	
 }
 
@@ -35,8 +43,8 @@ dependencies {
 sourceCompatibility='1.8'
 targetCompatibility='1.8'
 
-jar.archiveName = "vertx-web-accesslog-logging-appender-1.4.0_RC1.jar"
-bintrayUpload.packageName = "vertx-web-accesslog-logging-appender-1.4.0_RC1.jar"
+jar.archiveFileName = "vertx-web-accesslog-logging-appender-1.4.0.jar"
+bintrayUpload.packageName = "vertx-web-accesslog-logging-appender-1.4.0.jar"
 
 
 task sourceJar(type: Jar) {
@@ -49,7 +57,7 @@ publishing {
             
             groupId 'com.mdac'
             artifactId 'vertx-web-accesslog-logging-appender'
-			version '1.4.0_RC1'
+			version '1.4.0'
             
             from components.java
 
@@ -82,7 +90,7 @@ bintray {
         override = false
         vcsUrl = 'https://github.com/romanpierson/vertx-web-accesslog-logging-appender.git'
         version {
-        	name = '1.4.0_RC1'
+        	name = '1.4.0'
         }
     }
 }
@@ -95,6 +103,6 @@ jacocoTestReport {
 }
 
 wrapper() {
-  gradleVersion = '5.5.1'
+  gradleVersion = '6.7.1'
 }
 

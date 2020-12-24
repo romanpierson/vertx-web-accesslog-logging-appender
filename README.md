@@ -16,7 +16,7 @@ Just add it as a dependency to your project (gradle example)
 
 ```xml
 dependencies {
-	compile 'com.mdac:vertx-web-accesslog-logging-appender:1.3.0_RC1'
+	compile 'com.mdac:vertx-web-accesslog-logging-appender:1.4.0'
 }
 ```
 
@@ -78,8 +78,8 @@ For example see the different logging framework specific configuration files in 
 
 * Initial version (extracted from vertx-web-accesslog implementation)
 
-### 1.4.0_RC1
+### 1.4.0
 
-(2019-07-28)
+(2020-12-24)
 
 * Upgrade Vertx 4

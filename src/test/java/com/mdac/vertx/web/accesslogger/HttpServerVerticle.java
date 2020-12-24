@@ -18,9 +18,7 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import io.vertx.ext.web.Cookie;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.handler.CookieHandler;
 
 /**
  * 
@@ -48,16 +46,11 @@ public class HttpServerVerticle extends AbstractVerticle {
 			router.route().handler(AccessLoggerHandler.create(accessLogHandlerConfig));
 		}
 		
-		// Handle cookies
-		router.route().handler(CookieHandler.create());
-		
 		router
 			.route()
 				.handler(routingContext -> {
 					
 					// Add a cookie to response for testing
-					
-					routingContext.addCookie(Cookie.cookie("foo", "bar"));
 					
 					routingContext.next();
 					
